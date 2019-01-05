@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MouvementController
+public class PlayerController : MovementController
 {
+
+
+
     // Start is called before the first frame update
     override protected void Start()
     {
@@ -30,4 +33,15 @@ public class PlayerController : MouvementController
     {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        FriendlySporeController FriendlySpore = collision.gameObject.GetComponent<FriendlySporeController>();
+        if (collision.gameObject.GetComponent<FriendlySporeController>() != null)
+        {
+            Grow(FriendlySpore.Growth);
+            
+        }
+    }
+
 }
