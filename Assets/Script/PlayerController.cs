@@ -37,10 +37,15 @@ public class PlayerController : MovementController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         FriendlySporeController FriendlySpore = collision.gameObject.GetComponent<FriendlySporeController>();
-        if (collision.gameObject.GetComponent<FriendlySporeController>() != null)
+        ContaminationController Contamination = collision.gameObject.GetComponent<ContaminationController>();
+        if (FriendlySpore != null)
         {
             Grow(FriendlySpore.Growth);
-            
+
+        }
+        else if (Contamination != null)
+        {
+            Grow(-1);
         }
     }
 

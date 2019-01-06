@@ -15,6 +15,6 @@ public static class ExtUtil
     public static Vector2 RandomUnitVector2()
     {
         float f = Random.value;
-        return new Vector2(f, sign() * (Mathf.Abs(f) - 1));
+        return new Vector2(sign() * f, sign() * (Mathf.Abs(f) - 1));
     }
 }

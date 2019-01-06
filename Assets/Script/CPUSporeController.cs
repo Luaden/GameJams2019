@@ -11,6 +11,9 @@ public class CPUSporeController : MovementController
 {
 
     public MovementPattern Pattern = MovementPattern.StraightLine;
+    public float ExistDistanceFromPlayer = 5000f;
+    public float RespawnDistance = 2000f;
+    
     /// <summary>
     /// Defined in Start
     /// </summary>
@@ -29,13 +32,14 @@ public class CPUSporeController : MovementController
 
     private void FixedUpdate()
     {
+        float distance = DistanceFromPlayer();
         if (Pattern == MovementPattern.StraightLine)
         {
             Move(randomDirection);
         }
         else if (Pattern == MovementPattern.Follow)
         {
-            float distance = Vector3.Distance(GameController.Player.transform.position, transform.position);
+            
             if (DistanceToStartFollowing >= distance
                 && DistanceToStopFollowing <= distance)
             {
@@ -44,11 +48,34 @@ public class CPUSporeController : MovementController
                 Move(direction);
             }
         }
+        Debug.Log(distance);
+        if(distance > ExistDistanceFromPlayer)
+        {
+            Debug.Log("in");
+            Respawn();
+        }
+
+
+    }
+
+    public float DistanceFromPlayer()
+    {
+        return Vector3.Distance(GameController.Player.transform.position, transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    protected void RemoveSpore()
+    {
+        Destroy(gameObject);
+    }
+
+    protected void Respawn()
+    {
+        transform.position = new Vector2(ExtUtil.sign() * Random.value, ExtUtil.sign() * Random.value) * RespawnDistance + (Vector2)GameController.Player.transform.position;
     }
 }
