@@ -24,7 +24,7 @@ public class FriendlySporeController : CPUSporeController
     {
         if (collision.gameObject.GetComponent<MovementController>() != null)
         {
-            Destroy(gameObject);
+            RemoveSpore();
         }
     }
 
