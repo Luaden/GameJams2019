@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MovementPattern { StraightLine, Circle, Random, Follow };
+public enum MovementPattern { StraightLine, Spiral, Zigzag, Follow };
 
 /// <summary>
 /// Basic movement for computer either for friendly or contam spore
@@ -11,24 +11,51 @@ public class CPUSporeController : MovementController
 {
 
     public MovementPattern Pattern = MovementPattern.StraightLine;
-    public float ExistDistanceFromPlayer = 5000f;
-    public float RespawnDistance = 2000f;
+    
     
     /// <summary>
     /// Defined in Start
     /// </summary>
     protected Vector2 randomDirection;
+    protected float timer = 0f;
+    protected float angle = 0f;
+    protected float radius = 1000f;
     
+
+
     [Header("Follow Settings")]
     public float DistanceToStartFollowing = 100f;
     public float DistanceToStopFollowing = 0f;
+    [Header("Spiral Settings")]
+    
+    Vector2 _centerSpiral;
+    /// <summary>
+    /// clock or anticlockwise
+    /// </summary>
+    float _directionSpiral;
+
 
     // Start is called before the first frame update
     override protected void Start()
     {
         base.Start();
-        randomDirection = ExtUtil.RandomUnitVector2();
+        Init();
     }
+
+    void Init()
+    {
+        randomDirection = ExtUtil.RandomUnitVector2();
+        _centerSpiral = new Vector2(transform.position.x + 1, transform.position.y + 1);
+        _directionSpiral = ExtUtil.sign();
+    }
+
+    public void Respawn(Vector2 pos)
+    {
+        transform.position = pos;
+        Init();
+    }
+
+
 
     private void FixedUpdate()
     {
@@ -48,11 +75,26 @@ public class CPUSporeController : MovementController
                 Move(direction);
             }
         }
-        Debug.Log(distance);
-        if(distance > ExistDistanceFromPlayer)
+        else if(Pattern == MovementPattern.Spiral)
         {
-            Debug.Log("in");
-            Respawn();
+
+            
+            Vector2 rayon = (Vector2)transform.position - _centerSpiral;
+            Vector2 direction = new Vector2(_directionSpiral * rayon.y, - _directionSpiral * rayon.x);
+            Move(direction);
+
+        }
+        else if(Pattern == MovementPattern.Zigzag)
+        {
+            timer += Time.deltaTime;
+            if(timer > 10f)
+            {
+
+            }
+        }
+        if(distance > GameController.generator.ExistDistanceFromPlayer)
+        {
+            GameController.generator.OutOfRange(gameObject);
         }
 
 
@@ -74,8 +116,12 @@ public class CPUSporeController : MovementController
         Destroy(gameObject);
     }
 
-    protected void Respawn()
+    private void OnDrawGizmos()
     {
-        transform.position = new Vector2(ExtUtil.sign() * Random.value, ExtUtil.sign() * Random.value) * RespawnDistance + (Vector2)GameController.Player.transform.position;
+        if (Pattern == MovementPattern.Spiral)
+        {
+            Gizmos.color = new Color(125, 125, 125, 0.1f);
+            Gizmos.DrawLine(_centerSpiral, transform.position);
+        }
     }
 }

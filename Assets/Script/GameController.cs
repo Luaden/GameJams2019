@@ -6,7 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameObject Player;
     public static GameController gameController;
-
+    public static Generator generator;
+    public static bool gameStarted = false;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
         }
         else Destroy(gameObject);
         Player = FindObjectOfType<PlayerController>().gameObject;
+        generator = FindObjectOfType<Generator>();
     }
 
     // Start is called before the first frame update
@@ -27,6 +29,9 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(generator.worldInitialized)
+        {
+            gameStarted = true;
+        }
     }
 }
