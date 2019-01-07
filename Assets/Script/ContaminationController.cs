@@ -8,6 +8,7 @@ public class ContaminationController : CPUSporeController
     override protected void Start()
     {
         base.Start();
+        
     }
 
     // Update is called once per frame
@@ -23,5 +24,15 @@ public class ContaminationController : CPUSporeController
             RemoveSpore();
         }
     }
+
+    override protected void RegisterToGenerator()
+    {
+        GameController.generator.ContaminationList.Add(gameObject);
+    }
+    override protected void UnregisterToGenerator()
+    {
+        GameController.generator.ContaminationList.Remove(gameObject);
+    }
+
 
 }

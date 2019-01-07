@@ -28,4 +28,16 @@ public class FriendlySporeController : CPUSporeController
         }
     }
 
+    override protected void RegisterToGenerator()
+    {
+        Debug.Log(GameController.generator.FriendlySporeList.Count);
+
+        GameController.generator.FriendlySporeList.Add(gameObject);
+    }
+    override protected void UnregisterToGenerator()
+    {
+        Debug.Log(GameController.generator.FriendlySporeList.Count);
+        GameController.generator.FriendlySporeList.Remove(gameObject);
+    }
+
 }

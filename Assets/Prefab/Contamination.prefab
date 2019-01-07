@@ -132,10 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 11
-  Growth: 3
+  Growth: 1
   MaxGrowth: 10
   Pattern: 3
-  ExistDistanceFromPlayer: 5000
-  RespawnDistance: 200
   DistanceToStartFollowing: 100
   DistanceToStopFollowing: 0

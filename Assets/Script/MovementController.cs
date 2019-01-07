@@ -8,7 +8,7 @@ public class MovementController : MonoBehaviour
     public float maxSpeed = 3;
 
     [Tooltip("The size of the spore")]
-    public int Growth = 3;
+    public int Growth = 1;
     public int MaxGrowth = 10;
 
     private Rigidbody2D rb2d;
@@ -18,7 +18,7 @@ public class MovementController : MonoBehaviour
     virtual protected void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        InitGrowthResizing();
+        GrowthResizing();
     }
     /// <summary>
     /// AddForce movement * speed to max speed
@@ -26,31 +26,38 @@ public class MovementController : MonoBehaviour
     /// <param name="movement"></param>
     protected void Move(Vector2 movement)
     {
-        rb2d.AddForce(movement * maxSpeed);
-        // Limit max speed
-        if (rb2d.velocity.magnitude >= maxSpeed)
+        movement.Normalize();
+        if (rb2d.velocity.magnitude < maxSpeed)
         {
+            rb2d.AddForce(movement * maxSpeed);
+        }
+        else
+        { 
             rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }
 
     }
 
-    protected void Grow(int number)
+    virtual protected void Grow(int number)
     {
-
 
         Growth += number;
         if(Growth>MaxGrowth) Growth = MaxGrowth;
-        InitGrowthResizing();
+        if (Growth <= 0) Die();
+        GrowthResizing();
         
     }
 
     /// <summary>
     /// Will change the size of the spore according to its growth level
     /// </summary>
-    protected void InitGrowthResizing()
+    protected void GrowthResizing()
     {
-        transform.localScale = new Vector3(Growth * 11, Growth * 11, Growth * 11);
+        transform.localScale = new Vector3(Growth * 7, Growth * 7, Growth * 7);
     }
 
+    protected void Die()
+    {
+        Debug.Log("Die not implemented");
+    }
 }

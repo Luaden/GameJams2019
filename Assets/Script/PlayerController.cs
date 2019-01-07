@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MovementController
 {
 
-
+    public GameObject Mushroom;
 
     // Start is called before the first frame update
     override protected void Start()
@@ -49,4 +49,18 @@ public class PlayerController : MovementController
         }
     }
 
+    protected override void Grow(int number)
+    {
+        base.Grow(number);
+        if(Growth == MaxGrowth)
+        {
+            GrowIntoMushroom();
+        }
+    }
+
+    protected void GrowIntoMushroom()
+    {
+        Instantiate(Mushroom,transform.position,Quaternion.identity);
+        gameObject.SetActive(false);
+    }
 }

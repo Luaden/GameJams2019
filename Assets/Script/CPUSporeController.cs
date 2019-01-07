@@ -39,11 +39,18 @@ public class CPUSporeController : MovementController
     override protected void Start()
     {
         base.Start();
-        Init();
+        FirstInitialization();
     }
 
-    void Init()
+    void FirstInitialization()
     {
+        RegisterToGenerator();
+        Spawn();
+    }
+
+    protected void Spawn()
+    {
+        
         randomDirection = ExtUtil.RandomUnitVector2();
         _centerSpiral = new Vector2(transform.position.x + 1, transform.position.y + 1);
         _directionSpiral = ExtUtil.sign();
@@ -52,7 +59,7 @@ public class CPUSporeController : MovementController
     public void Respawn(Vector2 pos)
     {
         transform.position = pos;
-        Init();
+        Spawn();
     }
 
 
@@ -113,7 +120,18 @@ public class CPUSporeController : MovementController
 
     protected void RemoveSpore()
     {
+        UnregisterToGenerator();
         Destroy(gameObject);
+    }
+
+    virtual protected void RegisterToGenerator()
+    {
+        Debug.LogError("This cannot be registered");
+    }
+
+    virtual protected void UnregisterToGenerator()
+    {
+        Debug.LogError("This cannot be unregistered");
     }
 
     private void OnDrawGizmos()

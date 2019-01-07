@@ -9,11 +9,21 @@ public class Generator : MonoBehaviour
     public GameObject FriendlySpore;
     public GameObject Contamination;
     public GameObject Spore;
+    [Header("Spawning")]
     public float ExistDistanceFromPlayer = 5000f;
     public float RespawnDistance = 2000f;
     public float RepawnMaxDistance = 4000f;
     public float StartingSpawnPosition = 50f;
+    [Header("Quantity")]
+    public int minimumFriendlySpore = 5;
+    public int minimumContam = 20;
+    
+
     public bool worldInitialized = false;
+
+    public List<GameObject> FriendlySporeList = new List<GameObject>();
+    public List<GameObject> ContaminationList = new List<GameObject>();
+    //List<GameObject> SporeList = new List<GameObject>();
 
         // Start is called before the first frame update
     void Start()
@@ -24,7 +34,14 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(FriendlySporeList.Count < minimumFriendlySpore)
+        {
+            GenerateRandomCPU(FriendlySpore);
+        }
+        if(ContaminationList.Count < minimumContam)
+        {
+            GenerateRandomCPU(Contamination);
+        }
     }
 
 
@@ -44,7 +61,7 @@ public class Generator : MonoBehaviour
 
     
 
-    protected void GenerateRandomCPU(GameObject CPUGO)
+    protected GameObject GenerateRandomCPU(GameObject CPUGO)
     {
         CPUSporeController CPUcontroller = CPUGO.GetComponent<CPUSporeController>();
         if (CPUcontroller == null)
@@ -54,10 +71,11 @@ public class Generator : MonoBehaviour
         else
         {
             
-            Instantiate(CPUGO, GenerateRandomPositionRelativeToPlayer(), Quaternion.identity);
+            GameObject go = Instantiate(CPUGO, GenerateRandomPositionRelativeToPlayer(), Quaternion.identity);
             CPUcontroller.Pattern = (MovementPattern)Random.Range(0, System.Enum.GetNames(typeof(MovementPattern)).Length);
-
+            return go;
         }
+        return null;
     }
 
 
