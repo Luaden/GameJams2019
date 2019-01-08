@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
 
     public float maxSpeed = 5;
+    public float acceleration = 10;
 
     [Tooltip("The size of the spore")]
     public int Growth = 1;
@@ -29,11 +30,11 @@ public class MovementController : MonoBehaviour
         movement.Normalize();
         if (rb2d.velocity.magnitude < maxSpeed)
         {
-            rb2d.AddForce(movement * maxSpeed);
+            rb2d.AddForce(movement * acceleration);
         }
         else
         { 
-            rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
+            //rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
         }
 
     }
@@ -47,7 +48,7 @@ public class MovementController : MonoBehaviour
         GrowthResizing();
         
     }
-
+    
     /// <summary>
     /// Will change the size of the spore according to its growth level
     /// </summary>

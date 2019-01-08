@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 627f9246ef58aa440856952be3286783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FollowSpeed: 1
+  FollowSpeed: 0
   LagDistance: 10
 --- !u!20 &519420031
 Camera:
@@ -1936,6 +1936,10 @@ PrefabInstance:
       propertyPath: soundController
       value: 
       objectReference: {fileID: 991052023}
+    - target: {fileID: 312674624, guid: 3330d54f4ffc42b46954d7eb8458bc57, type: 3}
+      propertyPath: maxSpeed
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 312674629, guid: 3330d54f4ffc42b46954d7eb8458bc57, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3330d54f4ffc42b46954d7eb8458bc57, type: 3}
