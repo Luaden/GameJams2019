@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 341c1b366dc232e44a3ac27422fe5bf3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Mushroom: {fileID: 3737771590762450868, guid: 943e378591ac5b444b1efe961018f24b,
+      type: 3}
+  - growthSFX: {instanceID: 0}
+  - shrinkSFX: {instanceID: 0}
+  - deathSFX: {instanceID: 0}
+  - respawnSFX: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
