@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    public float maxSpeed = 3;
+    public float maxSpeed = 5;
 
     [Tooltip("The size of the spore")]
     public int Growth = 1;
@@ -43,7 +43,7 @@ public class MovementController : MonoBehaviour
 
         Growth += number;
         if(Growth>MaxGrowth) Growth = MaxGrowth;
-        if (Growth <= 0) Die();
+        //if (Growth <= 0) Die();
         GrowthResizing();
         
     }
@@ -56,9 +56,9 @@ public class MovementController : MonoBehaviour
         transform.localScale = new Vector3(Growth * 7, Growth * 7, Growth * 7);
     }
 
-    protected void Die()
+    public virtual void Die()
     {
-        
-        Debug.Log("Die not implemented");
+        this.gameObject.SetActive(false);
+        Debug.Log(this + "Set Inactive");
     }
 }

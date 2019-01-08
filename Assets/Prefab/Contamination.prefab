@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5478704709582500321}
   - component: {fileID: 5478704709582500320}
   - component: {fileID: 5478704709582500323}
+  - component: {fileID: 1456617139}
   m_Layer: 0
   m_Name: Contamination
   m_TagString: Untagged
@@ -70,9 +71,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9ae26fd04bfa2504ca4b14034bb412a3, type: 3}
-  m_Color: {r: 0.40973836, g: 0.4433962, b: 0.21124065, a: 1}
+  m_Color: {r: 0.5489943, g: 0.5566038, b: 0.50671947, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,3 +138,22 @@ MonoBehaviour:
   Pattern: 3
   DistanceToStartFollowing: 100
   DistanceToStopFollowing: 0
+--- !u!95 &1456617139
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5478704709582500322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e8c5b8f9bd391f4bba720fbebcbac6f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

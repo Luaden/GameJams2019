@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d0cc489f482fd9e429164c5f07899e54
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - growthClip: {fileID: 8300000, guid: cd4fcfe39559ca848b58f83d1418be66, type: 3}
+  - shrinkClip: {fileID: 8300000, guid: dc5642dc207b2a244a5361ae89bb62e0, type: 3}
+  - deathClip: {fileID: 8300000, guid: a87e27a994fbf98438e51dea8cb14a66, type: 3}
+  - respawnClip: {fileID: 8300000, guid: f18a6854d3b656f44a4bc22d4db56808, type: 3}
+  - sFX: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

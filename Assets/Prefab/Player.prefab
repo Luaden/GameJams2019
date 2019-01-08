@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341c1b366dc232e44a3ac27422fe5bf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 3
+  maxSpeed: 15
   Growth: 1
   MaxGrowth: 10
   Mushroom: {fileID: 3737771590762450868, guid: 943e378591ac5b444b1efe961018f24b,
@@ -257,3 +257,4 @@ MonoBehaviour:
   shrinkSFX: {fileID: 8300000, guid: dc5642dc207b2a244a5361ae89bb62e0, type: 3}
   deathSFX: {fileID: 8300000, guid: a87e27a994fbf98438e51dea8cb14a66, type: 3}
   respawnSFX: {fileID: 8300000, guid: f18a6854d3b656f44a4bc22d4db56808, type: 3}
+  respawnMenu: {fileID: 0}

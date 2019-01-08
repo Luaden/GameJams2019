@@ -5,21 +5,19 @@ using UnityEngine;
 public class PlayerController : MovementController
 {
 
+
     public GameObject Mushroom;
-    public AudioClip growthSFX;
-    public AudioClip shrinkSFX;
-    public AudioClip deathSFX;
-    public AudioClip respawnSFX;
-    private AudioSource soundFX;
+    public GameObject respawnMenu;
+    //public GameObject soundNewTry;
+    public AudioSource sFXAudioSource;
+    public SoundController soundController;
+
 
     // Start is called before the first frame update
     override protected void Start()
     {
-        AudioSource soundFX = GetComponent<AudioSource>();
-        base.Start(); // Get rg2b component 
-        
-
-
+        base.Start(); // Get rg2b component
+        //soundController = new SoundController();
     }
 
     private void FixedUpdate()
@@ -43,25 +41,32 @@ public class PlayerController : MovementController
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         FriendlySporeController FriendlySpore = collision.gameObject.GetComponent<FriendlySporeController>();
         ContaminationController Contamination = collision.gameObject.GetComponent<ContaminationController>();
-        // I'm not sure why, but not having AudioSource in this function causes 
-        // null reference exception.
-        AudioSource soundFX = GetComponent<AudioSource>();
+        sFXAudioSource = gameObject.GetComponent<AudioSource>();
+        
+
 
         if (FriendlySpore != null)
         {
+            Debug.Log("We're here.");
             Grow(FriendlySpore.Growth);
-            soundFX.PlayOneShot(growthSFX);
-
+            soundController.GrowthClip();
 
         }
-        else if (Contamination != null)
+        else if (Contamination != null && Growth > 1)
         {
             Grow(-1);
-            soundFX.PlayOneShot(shrinkSFX);
+            soundController.ShrinkClip();
+
+        }
+        else if (Contamination != null && Growth <= 1)
+        {
+            Grow(-1);
+            soundController.DeathClip();
+            Die();
         }
     }
 
@@ -71,15 +76,24 @@ public class PlayerController : MovementController
         if(Growth == MaxGrowth)
         {
             GrowIntoMushroom();
+            soundController.RespawnClip();
+
         }
     }
 
     protected void GrowIntoMushroom()
     {
         Instantiate(Mushroom,transform.position,Quaternion.identity);
-        soundFX.PlayOneShot(respawnSFX);
         gameObject.SetActive(false);
         
     }
+    public override void Die ()
+    {
+   
+        base.Die();
+        Debug.Log("Player died.");
+        respawnMenu.SetActive(true);
+    }
 
+        
 }
