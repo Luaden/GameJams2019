@@ -118,7 +118,7 @@ public class CPUSporeController : MovementController
         
     }
 
-    protected void RemoveSpore()
+    public void RemoveSpore()
     {
         UnregisterToGenerator();
         Destroy(gameObject);

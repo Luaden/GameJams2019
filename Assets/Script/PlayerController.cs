@@ -8,6 +8,7 @@ public class PlayerController : MovementController
 
     public GameObject Mushroom;
     public GameObject respawnMenu;
+
     //public GameObject soundNewTry;
     public AudioSource sFXAudioSource;
     public SoundController soundController;
@@ -32,13 +33,14 @@ public class PlayerController : MovementController
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
         Move(movement);
+        Sporulate();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -84,9 +86,39 @@ public class PlayerController : MovementController
     protected void GrowIntoMushroom()
     {
         Instantiate(Mushroom,transform.position,Quaternion.identity);
-        gameObject.SetActive(false);
+        Growth = 1;
+        Grow(0);
+        sporulate = true;
+        _firstTime = true;
         
+
     }
+    public bool sporulate = false;
+    float _timer = 100f;
+    bool _firstTime = false;
+    Vector2 _randomDirection;
+    protected void Sporulate()
+    {
+        if(sporulate && _firstTime == true)
+        {
+            _timer = 0f;
+            _randomDirection = ExtUtil.RandomUnitVector2() * 250;
+            _firstTime = false; 
+        }
+        if(sporulate && _timer < 5f)
+        {
+            _timer += Time.deltaTime;
+            rb2d.AddForce(_randomDirection);
+            GetComponent<CircleCollider2D>().enabled = false;
+        }
+        else
+        {
+            GetComponent<CircleCollider2D>().enabled = true;
+            sporulate = false;
+        }
+    }
+
+
     public override void Die ()
     {
    

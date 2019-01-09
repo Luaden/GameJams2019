@@ -34,17 +34,34 @@ public class Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(FriendlySporeList.Count < minimumFriendlySpore)
+        if (!GameController.Player.GetComponent<PlayerController>().sporulate)
         {
-            GenerateRandomCPU(FriendlySpore);
+            if (FriendlySporeList.Count < minimumFriendlySpore)
+            {
+                GenerateRandomCPU(FriendlySpore);
+            }
+            if (ContaminationList.Count < minimumContam)
+            {
+                GenerateRandomCPU(Contamination);
+            }
         }
-        if(ContaminationList.Count < minimumContam)
+        else
         {
-            GenerateRandomCPU(Contamination);
+            EmptyLevel();
         }
     }
 
-
+    void EmptyLevel()
+    {
+        while(FriendlySporeList.Count > 0)
+        {
+            FriendlySporeList[FriendlySporeList.Count - 1].GetComponent<CPUSporeController>().RemoveSpore();
+        }
+        while (ContaminationList.Count > 0)
+        {
+            ContaminationList[ContaminationList.Count - 1].GetComponent<CPUSporeController>().RemoveSpore();
+        }
+    }
 
 
     public void InitializeWorld()

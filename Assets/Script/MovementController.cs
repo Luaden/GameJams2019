@@ -12,7 +12,7 @@ public class MovementController : MonoBehaviour
     public int Growth = 1;
     public int MaxGrowth = 10;
 
-    private Rigidbody2D rb2d;
+    protected Rigidbody2D rb2d;
 
 
     // Start is called before the first frame update
