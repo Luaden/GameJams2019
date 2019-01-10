@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum MovementPattern { StraightLine, Spiral, Zigzag, Follow };
+public enum Team { Friend, Contam};
 
 /// <summary>
 /// Basic movement for computer either for friendly or contam spore

@@ -8,11 +8,16 @@ public class PlayerController : MovementController
 
     public GameObject Mushroom;
     public GameObject respawnMenu;
+    public int numMushroom = 0;
 
     //public GameObject soundNewTry;
     public AudioSource sFXAudioSource;
     public SoundController soundController;
 
+    private void Awake()
+    {
+        team = Team.Friend;
+    }
 
     // Start is called before the first frame update
     override protected void Start()
@@ -53,8 +58,7 @@ public class PlayerController : MovementController
 
         if (FriendlySpore != null)
         {
-            Debug.Log("We're here.");
-            Grow(FriendlySpore.Growth);
+            Grow(1);
             soundController.GrowthClip();
 
         }
@@ -90,6 +94,7 @@ public class PlayerController : MovementController
         Grow(0);
         sporulate = true;
         _firstTime = true;
+        numMushroom++;
         
 
     }
@@ -105,7 +110,7 @@ public class PlayerController : MovementController
             _randomDirection = ExtUtil.RandomUnitVector2() * 250;
             _firstTime = false; 
         }
-        if(sporulate && _timer < 5f)
+        if(sporulate && _timer < 2f)
         {
             _timer += Time.deltaTime;
             rb2d.AddForce(_randomDirection);
@@ -123,7 +128,6 @@ public class PlayerController : MovementController
     {
    
         base.Die();
-        Debug.Log("Player died.");
         respawnMenu.SetActive(true);
     }
 

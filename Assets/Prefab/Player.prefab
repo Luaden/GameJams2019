@@ -251,10 +251,11 @@ MonoBehaviour:
   maxSpeed: 120
   acceleration: 100
   Growth: 1
-  MaxGrowth: 10
+  MaxGrowth: 8
   Mushroom: {fileID: 3737771590762450868, guid: 943e378591ac5b444b1efe961018f24b,
     type: 3}
   respawnMenu: {fileID: 0}
+  numMushroom: 0
   sFXAudioSource: {fileID: 0}
   soundController: {fileID: 0}
   sporulate: 0

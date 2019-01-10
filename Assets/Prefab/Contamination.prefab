@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 11
+  acceleration: 10
+  team: 1
   Growth: 1
   MaxGrowth: 10
   Pattern: 3

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ContaminationController : CPUSporeController
 {
+
+    private void Awake()
+    {
+        team = Team.Contam;
+    }
+
     // Start is called before the first frame update
     override protected void Start()
     {
@@ -19,8 +25,10 @@ public class ContaminationController : CPUSporeController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<MovementController>() != null)
+        MovementController mc = collision.gameObject.GetComponent<MovementController>();
+        if (mc != null && mc.team != Team.Contam)
         {
+
             RemoveSpore();
         }
     }

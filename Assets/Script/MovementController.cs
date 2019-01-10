@@ -7,6 +7,7 @@ public class MovementController : MonoBehaviour
 
     public float maxSpeed = 5;
     public float acceleration = 10;
+    public Team team;// { get; protected set; }
 
     [Tooltip("The size of the spore")]
     public int Growth = 1;
@@ -52,14 +53,13 @@ public class MovementController : MonoBehaviour
     /// <summary>
     /// Will change the size of the spore according to its growth level
     /// </summary>
-    protected void GrowthResizing()
+    public void GrowthResizing()
     {
-        transform.localScale = new Vector3(Growth * 7, Growth * 7, Growth * 7);
+        transform.localScale = new Vector3(Growth * 11, Growth * 11, Growth * 11);
     }
 
     public virtual void Die()
     {
         this.gameObject.SetActive(false);
-        Debug.Log(this + "Set Inactive");
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Generator : MonoBehaviour
 {
 
-    public GameObject Player;
+    //public GameObject Player;
     public GameObject FriendlySpore;
     public GameObject Contamination;
     public GameObject Spore;
@@ -15,8 +15,8 @@ public class Generator : MonoBehaviour
     public float RepawnMaxDistance = 4000f;
     public float StartingSpawnPosition = 50f;
     [Header("Quantity")]
-    public int minimumFriendlySpore = 5;
-    public int minimumContam = 20;
+    public int minimumFriendlySpore = 25;
+    public int minimumContam = 25;
     
 
     public bool worldInitialized = false;
@@ -36,11 +36,11 @@ public class Generator : MonoBehaviour
     {
         if (!GameController.Player.GetComponent<PlayerController>().sporulate)
         {
-            if (FriendlySporeList.Count < minimumFriendlySpore)
+            if (FriendlySporeList.Count < minimumFriendlySpore + GameController.Player.GetComponent<PlayerController>().numMushroom)
             {
                 GenerateRandomCPU(FriendlySpore);
             }
-            if (ContaminationList.Count < minimumContam)
+            if (ContaminationList.Count < minimumContam + GameController.Player.GetComponent<PlayerController>().numMushroom *3)
             {
                 GenerateRandomCPU(Contamination);
             }
@@ -87,9 +87,23 @@ public class Generator : MonoBehaviour
         }
         else
         {
-            
+
             GameObject go = Instantiate(CPUGO, GenerateRandomPositionRelativeToPlayer(), Quaternion.identity);
+            CPUcontroller = go.GetComponent<CPUSporeController>();
+
+
             CPUcontroller.Pattern = (MovementPattern)Random.Range(0, System.Enum.GetNames(typeof(MovementPattern)).Length);
+            float newSpeed = (CPUcontroller.team == Team.Friend ? 3 : 10)
+                + (GameController.Player.GetComponent<PlayerController>().numMushroom * GameController.Player.GetComponent<PlayerController>().numMushroom) * 3;
+
+            CPUcontroller.acceleration = newSpeed;
+            CPUcontroller.maxSpeed = (CPUcontroller.team == Team.Friend ? 3 : 10)
+                + (GameController.Player.GetComponent<PlayerController>().numMushroom * GameController.Player.GetComponent<PlayerController>().numMushroom)*3;
+            if (CPUcontroller.team == Team.Contam)
+            {
+                CPUcontroller.Growth = CPUcontroller.Growth + GameController.Player.GetComponent<PlayerController>().numMushroom;
+                CPUcontroller.GrowthResizing();
+            }
             return go;
         }
         return null;

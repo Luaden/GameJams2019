@@ -8,6 +8,11 @@ using UnityEngine;
 public class FriendlySporeController : CPUSporeController
 {
 
+    private void Awake()
+    {
+        team = Team.Friend;
+    }
+
     // Start is called before the first frame update
     override protected void Start()
     {

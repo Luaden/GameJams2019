@@ -32,7 +32,7 @@ public class SoundController : MonoBehaviour
 
     public void RespawnClip()
     {
-        sFX.PlayOneShot(respawnClip);
+        sFX.PlayOneShot(respawnClip, .1f);
     }
 
     public void DeathClip()
